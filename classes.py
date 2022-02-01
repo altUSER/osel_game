@@ -37,6 +37,15 @@ class Session():
                 extcode=0
         return cost
 
-    def giveCards(self, uid, count):
+    def giveCardsToUsers(self, uid, count):
         for i in range(count):
             self.giveRandomCard(uid)
+
+    def giveCardsToUsers(self, handSize):
+        if handSize*len(self.users)>109:
+            raise ValueError('Too many cards in hand')
+        osel = random.randint(len(self.users)-1)
+        self.users[osel].hand[0] = 1
+        self.hand[0] = 0
+
+        for user in self
