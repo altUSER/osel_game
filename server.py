@@ -4,6 +4,7 @@ import time
 
 def sendToAll(connections, data):
     for conn in connections:
+        conn[0].send(b"msg")
         conn[0].send(data)
 
 playersCount = 2
@@ -15,6 +16,8 @@ sock.listen(playersCount)
 connections = []
 for i in range(playersCount):
     connections.append(sock.accept())
+    username = sock.recv(1024)
+    sendToAll(bytes("User " + username + "connected."))
     print("player.connect")
     print(connections)
     if i < playersCount-1:
