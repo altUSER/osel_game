@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 import socket
 import time
 
@@ -10,14 +10,14 @@ def sendToAll(connections, data):
 playersCount = 2
 
 sock = socket.socket()
-sock.bind(('', 9091))
+sock.bind(('', 9090))
 sock.listen(playersCount)
 
 connections = []
 for i in range(playersCount):
     connections.append(sock.accept())
-    username = sock.recv(1024)
-    sendToAll(bytes("User " + username + "connected."))
+    username = connections[i][0].recv(1024)
+    sendToAll(connections, bytes("User " + username + "connected."))
     print("player.connect")
     print(connections)
     if i < playersCount-1:
